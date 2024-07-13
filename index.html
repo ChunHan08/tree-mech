@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <title>Tree Machine</title>
+</head>
+
+<!-- Import p5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+
+<script>
+  var depth = 5;
+  var curl = Math.PI / 3;
+  var breadth = 5;
+  var spread = Math.PI / 3;
+  function branch(d) {
+    line(0, 0, 0, 1)
+    if (d > 1) {
+      translate(0, 1)
+      rotate(curl)
+      scale(0.5)
+      for (var i = 0; i < breadth; i++) {
+        branch(d - 1)
+        rotate(spread)
+      }
+      rotate(-spread * breadth)
+      rotate(-curl)
+      scale(2)
+      translate(0, -1)
+    }
+  }
+  function setup() {
+    createCanvas(400, 400)
+  }
+  function draw() {
+    curl = Math.PI * ((mouseX / width) * 2 - 1)
+    spread = Math.PI * ((mouseY / height) * 2 - 1)
+    background(0);
+    stroke(255);
+    translate(200, 400);
+    rotate(Math.PI);
+    scale(200);
+    strokeWeight(0.1);
+    branch(depth);
+  }
+</script>
+
+</html>
